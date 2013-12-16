@@ -7,7 +7,7 @@ which lacks imshow like API from C++ Opencv interface.
 
 Usage:
 ---------
-Simply Add the Imshow.jar or the project to your build path of the Project
+Simply Add the Imshow.jar or the project to the build path of your Project
 
 API:
 ------
