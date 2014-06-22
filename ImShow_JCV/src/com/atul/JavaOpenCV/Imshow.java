@@ -2,6 +2,7 @@ package com.atul.JavaOpenCV;
 
 /*
  * Author: ATUL
+ * Thanks to Daniel Baggio and sutr90 for improvements
  * This code can be used as an alternative to imshow of OpenCV for JAVA-OpenCv 
  * Make sure OpenCV Java is in your Build Path
  * Usage :
@@ -13,13 +14,16 @@ package com.atul.JavaOpenCV;
 
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferByte;
-import java.io.ByteArrayInputStream;
-import java.io.InputStream;
-import javax.imageio.ImageIO;
+
+//import java.io.ByteArrayInputStream;
+//import java.io.InputStream;
+//import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.plaf.ButtonUI;
+//import javax.swing.plaf.ButtonUI;
+
+import javax.swing.WindowConstants;
 
 import org.opencv.core.Mat;
 import org.opencv.core.MatOfByte;
@@ -46,6 +50,7 @@ public class Imshow {
 		Window.setResizable(false);
 		Window.setTitle(title);
 		SizeCustom = false;
+		setCloseOption(0);
 	}
 
 	public Imshow(String title, int height, int width) {
@@ -61,6 +66,7 @@ public class Imshow {
 		Window.getContentPane().add(label);
 		Window.setResizable(false);
 		Window.setTitle(title);
+		setCloseOption(0);
 
 	}
 
@@ -68,13 +74,13 @@ public class Imshow {
 		if (SizeCustom) {
 			Imgproc.resize(img, img, new Size(Height, Width));
 		}
-		//Highgui.imencode(".jpg", img, matOfByte);
-		//byte[] byteArray = matOfByte.toArray();
+		Highgui.imencode(".jpg", img, matOfByte);
+		// byte[] byteArray = matOfByte.toArray();
 		BufferedImage bufImage = null;
 		try {
-			//InputStream in = new ByteArrayInputStream(byteArray);
-			//bufImage = ImageIO.read(in);
-			bufImage=toBufferedImage(img);
+			// InputStream in = new ByteArrayInputStream(byteArray);
+			// bufImage = ImageIO.read(in);
+			bufImage = toBufferedImage(img);
 			image.setImage(bufImage);
 			Window.pack();
 			label.updateUI();
@@ -84,22 +90,42 @@ public class Imshow {
 		}
 	}
 
-	//CREDITS TO DANIEL:  http://danielbaggio.blogspot.com.br/ for the improved version !
-	
-	public BufferedImage toBufferedImage(Mat m){
-	      int type = BufferedImage.TYPE_BYTE_GRAY;
-	      if ( m.channels() > 1 ) {
-	          type = BufferedImage.TYPE_3BYTE_BGR;
-	      }
-	      int bufferSize = m.channels()*m.cols()*m.rows();
-	      byte [] b = new byte[bufferSize];
-	      m.get(0,0,b); // get all the pixels
-	      BufferedImage image = new BufferedImage(m.cols(),m.rows(), type);
-	      final byte[] targetPixels = ((DataBufferByte) image.getRaster().getDataBuffer()).getData();
-	      System.arraycopy(b, 0, targetPixels, 0, b.length);  
-	      return image;
+	// CREDITS TO DANIEL: http://danielbaggio.blogspot.com.br/ for the improved
+	// version !
 
-	  }
+	public BufferedImage toBufferedImage(Mat m) {
+		int type = BufferedImage.TYPE_BYTE_GRAY;
+		if (m.channels() > 1) {
+			type = BufferedImage.TYPE_3BYTE_BGR;
+		}
+		int bufferSize = m.channels() * m.cols() * m.rows();
+		byte[] b = new byte[bufferSize];
+		m.get(0, 0, b); // get all the pixels
+		BufferedImage image = new BufferedImage(m.cols(), m.rows(), type);
+		final byte[] targetPixels = ((DataBufferByte) image.getRaster()
+				.getDataBuffer()).getData();
+		System.arraycopy(b, 0, targetPixels, 0, b.length);
+		return image;
+
+	}
 	
+	//Thanks to sutr90 for reporting the issue : https://github.com/sutr90
 	
+	public void setCloseOption(int option) {
+
+		switch (option) {
+		case 0:
+			Window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+			break;
+		case 1:
+			Window.setDefaultCloseOperation(WindowConstants.HIDE_ON_CLOSE);
+			break;
+
+		default:
+			Window.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
+
+		}
+
+	}
+
 }

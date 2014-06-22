@@ -31,7 +31,7 @@ public class example {
 		// -------------------------
 		Mat m = new Mat();
 		VideoCapture vcam = new VideoCapture(0);
-
+		
 		// loop until VideoCamera is Available
 		while (vcam.isOpened() == false)
 			;
@@ -39,13 +39,16 @@ public class example {
 		// Bug Fix: Loop until initial image frames are empty
 		while (m.empty()) {
 			vcam.retrieve(m);
+			
 		}
 
 		while (true) {
+			
 			vcam.retrieve(m);
 			/***
 			 * Show the image
 			 */
+			//System.out.println(m.dump());
 			im.showImage(m);
 			/************/
 		}
