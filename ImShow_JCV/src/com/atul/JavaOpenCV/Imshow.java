@@ -36,7 +36,7 @@ public class Imshow {
 	public JFrame Window;
 	private ImageIcon image;
 	private JLabel label;
-	private MatOfByte matOfByte;
+	//private MatOfByte matOfByte;
 	private Boolean SizeCustom;
 	private int Height, Width;
 
@@ -44,7 +44,7 @@ public class Imshow {
 		Window = new JFrame();
 		image = new ImageIcon();
 		label = new JLabel();
-		matOfByte = new MatOfByte();
+		//matOfByte = new MatOfByte();
 		label.setIcon(image);
 		Window.getContentPane().add(label);
 		Window.setResizable(false);
@@ -61,7 +61,7 @@ public class Imshow {
 		Window = new JFrame();
 		image = new ImageIcon();
 		label = new JLabel();
-		matOfByte = new MatOfByte();
+		//matOfByte = new MatOfByte();
 		label.setIcon(image);
 		Window.getContentPane().add(label);
 		Window.setResizable(false);
@@ -74,7 +74,7 @@ public class Imshow {
 		if (SizeCustom) {
 			Imgproc.resize(img, img, new Size(Height, Width));
 		}
-		Highgui.imencode(".jpg", img, matOfByte);
+		//Highgui.imencode(".jpg", img, matOfByte);
 		// byte[] byteArray = matOfByte.toArray();
 		BufferedImage bufImage = null;
 		try {
