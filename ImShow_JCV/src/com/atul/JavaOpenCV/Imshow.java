@@ -2,7 +2,7 @@ package com.atul.JavaOpenCV;
 
 /*
  * Author: ATUL
- * Thanks to Daniel Baggio and sutr90 for improvements
+ * Thanks to Daniel Baggio , Jan Monterrubio and sutr90 for improvements
  * This code can be used as an alternative to imshow of OpenCV for JAVA-OpenCv 
  * Make sure OpenCV Java is in your Build Path
  * Usage :
@@ -135,6 +135,10 @@ public class Imshow {
 	public void setResizable(boolean resizable) {
 		Window.setResizable(resizable);
 	}
+
+
+	// Thanks to Jan Monterrubio for additional static methods for viewing images. 
+
 
 	/**
 	 * Displays the given {@link Mat} in a new instance of {@link Imshow}
