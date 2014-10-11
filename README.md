@@ -26,7 +26,7 @@ For ways to customise the GUI Frame or Window see the example.
 
 Credits / Special Thanks: 
 -------------------------
-Daniel Baggio and sutr90 for improvements
+Daniel Baggio , Jan Monterrubio and sutr90 for improvements
 
 Note:
 -----
